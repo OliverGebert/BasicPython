@@ -82,7 +82,7 @@ def markov(text):
 
 def zufalls_wort(h):
     """liefert ein Zufallswort gemäß Häufigkeit in einem Histogramm"""
-    t = []
+    t = [""]
     for wort, haeuf in h.items():
         t.extend([wort] * haeuf)
     return random.choice(t)
@@ -117,7 +117,7 @@ def textgenerator(ml, start, anz=50):
 # vname,  nname = name.split(" ")
 # print ('Vorname Reverse: ',vname[::-1], 'Nachname Reverse: ',  nname[::-1])
 
-file = input("\nDateiname der zu untersuchenden Datei")
+file = input("\nDateiname der zu untersuchenden Datei: ")
 muster = input("\nTextmuster für Mustervergleich und Zufallstext: ")
 
 with open(file) as fin:
