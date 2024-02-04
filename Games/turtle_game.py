@@ -6,8 +6,10 @@ import colorgram
 hirst_colors = colorgram.extract("./HirstDotPainting.jpeg", 25)
 colors = ["medium blue", "sky blue", "pale turquoise", "dark cyan", "light steel blue", "medium aquamarine", "medium sea green"]
 directions = [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 0]
-timmy = Turtle()
-timmy.shape("turtle")
+timmy = Turtle(shape="turtle")
+timmy.color("green")
+tommy = Turtle(shape="classic")
+tommy.color("blue")
 my_screen = Screen()
 my_screen.colormode(255)
 my_screen.setup(width=1.0, height=1.0, startx=None, starty=None)
@@ -28,83 +30,59 @@ def create_hirst_painting():
     timmy.showturtle()
     timmy.teleport(x0, y0)
 
-def shape(angle:int, size:int):
+def shape(angle:int):
     """create an n-edged shape based on the input angle for the shape"""
     for i in range(0, 360, angle):
         timmy.right(angle)
-        timmy.fd(size)
+        timmy.fd(20)
 
-def random_walk(steps, size):
+def random_walk():
     """conduct number of steps and for each line select a random color from list and a random direction from list"""
-    for i in range(1, steps):
+    for i in range(1, 50):
         timmy.setheading(random.choice(directions))
         timmy.color(random.choice(colors))
-        timmy.fd(size)
+        timmy.fd(20)
 
-# defaults        
-dashed = False  # only used for fd and bd stepping
-size = 20       # step size
-speed = 5       # spped for operations
-thick = 1       # line thickness
-key = "o"       # start key to avoid immediate termination of while loop
+def forward():
+    timmy.fd(20)
 
-while key != "x":
-    key = input("next: ")
-    timmy.speed(speed)
-    timmy.pensize(thick)
-    match key:
-        case "hirst":
-            create_hirst_painting()
-        case "r":
-            timmy.write(f"lenght(l): {size},\nthickness(t): {thick},\nspeed (+-): {speed}", False, "left", ("Arial", 9, "bold"))
-        case "n":
-            timmy.setheading(90)
-        case "green"|"red"|"blue"|"black":
-            timmy.color(key)
-        case "3"|"4"|"5"|"6"|"8"|"9"|"10"|"12"|"15"|"20"|"30"|"60":
-            shape(int(360/int(key)), size)
-        case "rc":
-            timmy.color(random.choice(colors))
-        case "rw":
-            random_walk(50, size)
-        case "+":
-            if speed < 10:
-                speed += 1
-        case "-":
-            if speed > 1:
-                speed -= 1
-        case "l":
-            if size > 10:
-                size -= 10
-        case "L":
-            if size < 200:
-                size += 10
-        case "t":
-            if thick > 2:
-                thick -= 2
-        case "T":
-            if thick < 20:
-                thick += 2
-        case "d":
-            dashed = not(dashed)
-        case "a":
-            timmy.left(90)
-        case "s":
-            timmy.right(90)
-        case "y":
-            timmy.bd(size/2)
-            if dashed:
-                timmy.penup()
-                timmy.bd(size/2)
-                timmy.pendown()
-            else:
-                timmy.bd(size/2)
-        case "w":
-            timmy.fd(size)
-            if dashed:
-                timmy.penup()
-                timmy.fd(size)
-                timmy.pendown()
-            else:
-                timmy.fd(size)
-    my_screen.update()
+def backward():
+    timmy.bk(20)
+
+def left():
+    timmy.left(15)
+
+def right():
+    timmy.right(15)
+    
+def random_color():
+    timmy.color(random.choice(colors))
+
+def north():
+    timmy.setheading(90)
+
+def polygon():
+    edges = my_screen.numinput("number of edges in polygon", "Number:")
+    shape(int(360/int(edges)))
+
+#defaults        
+timmy.speed(5)
+timmy.pensize(2)
+
+my_screen.onkey(fun=forward, key="Up")
+my_screen.onkey(fun=backward, key="Down")
+my_screen.onkey(fun=left, key="Left")
+my_screen.onkey(fun=right, key="Right")
+my_screen.onkey(fun=north, key="n")
+my_screen.onkey(fun=random_walk, key="w")
+my_screen.onkey(fun=random_color, key="c")
+my_screen.onkey(fun=create_hirst_painting, key="h")
+my_screen.onkey(fun=polygon, key="p")
+my_screen.listen()
+for i in range(0, 100):
+    tommy.setheading(random.choice(directions))
+    tommy.color(random.choice(colors))
+    tommy.fd(20)
+    
+
+my_screen.exitonclick()
