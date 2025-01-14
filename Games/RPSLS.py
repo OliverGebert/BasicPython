@@ -12,7 +12,7 @@ matrix = [lineR, lineP, lineS, lineL, lineS]
 
 print("the Game is Rock Paper Scissors Lizard Spock")
 userChoice = input("As user, please choose (R,P,S,L,S): ").upper()
-computerChoice = choice[random.randint(0,4)]
+computerChoice = choice[random.randint(0, 4)]
 print(f"User    : {longChoice[choice.index(userChoice)]}")
 print(f"Computer: {longChoice[choice.index(computerChoice)]}\n")
 

@@ -3,22 +3,23 @@
 import random as rand
 
 stackIDs = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "B", "D", "K", "A"]
-decks = 8 # number od decks in shoe
+decks = 8  # number od decks in shoe
 # create a shoe of cards
-shoe = {"2" : decks,
-        "3" : decks,
-        "4" : decks,
-        "5" : decks,
-        "6" : decks,
-        "7" : decks,
-        "8" : decks,
-        "9" : decks,
-        "10" : decks,
-        "B" : decks,
-        "D" : decks,
-        "K" : decks,
-        "A" : decks
-       }
+shoe = {"2": decks,
+        "3": decks,
+        "4": decks,
+        "5": decks,
+        "6": decks,
+        "7": decks,
+        "8": decks,
+        "9": decks,
+        "10": decks,
+        "B": decks,
+        "D": decks,
+        "K": decks,
+        "A": decks
+        }
+
 
 def dealCard():
     """return a random card from the shoe, which still exists"""
@@ -33,10 +34,12 @@ def dealCard():
         # debug: print(f"{card} from shoe removed")
     return card
 
+
 def countShoe():
     """return number of cards in shoe"""
     global shoe
     return sum(shoe.values())
+
 
 def evalHand(hand):
     """returns the value of a hand"""
@@ -52,9 +55,10 @@ def evalHand(hand):
                 handValue += 11
 
     # check if hand is to  high and ass can be reduced to value of One
-    if handValue >21 and "A" in hand:
+    if handValue > 21 and "A" in hand:
         handValue -= 10
     return handValue
+
 
 def hasBlackJack(hand):
     """returns True if hand has a blackjack"""
@@ -63,16 +67,21 @@ def hasBlackJack(hand):
     else:
         return False
 
+
 def displayCards():
     """display the cards of the player and the dealer"""
-    print(f"\nDealer cards: {handDealer} with a value of: {evalHand(handDealer)}")
-    print(f"Player cards: {handPlayer} with a value of: {evalHand(handPlayer)}")
+    print(f"\nDealer cards: {handDealer} with a value of: {
+          evalHand(handDealer)}")
+    print(f"Player cards: {handPlayer} with a value of: {
+          evalHand(handPlayer)}")
+
 
 def displayCash():
     """display the cash of the player and the dealer"""
     print(f"Dealer has {cashDealer} cashes")
     print(f"Player has {cashPlayer} cashes")
     print(f"Pot has {cashPot} cashes")
+
 
 def displayResult(handPlayer, handDealer):
     """display the result of the game"""
@@ -83,7 +92,7 @@ def displayResult(handPlayer, handDealer):
     # bet gies to the dealer for distribution in case Player has won
     cashDealer += cashPot
     cashPot = 0
-    
+
     if evalHand(handPlayer) > 21:
         print(f"\n--> Player bust")
     elif evalHand(handDealer) > 21:
@@ -123,7 +132,8 @@ def displayResult(handPlayer, handDealer):
             print(f"\n--> draw")
             cashPlayer += einsatz
             cashDealer -= einsatz
-                    
+
+
 # initialize game
 print("***** Welcome to blackjack *****")
 einsatz = 100
@@ -146,36 +156,36 @@ displayResult(["9", "B"],["7", "B", "D"])        # Dealer lost - bust
 
 # start game
 while cashDealer >= 100 and cashPlayer >= 100 and countShoe() > 15:
-    
+
     # start round
-    handDealer = [] # no cards in hand
-    handPlayer = [] # no cards in hand
+    handDealer = []  # no cards in hand
+    handPlayer = []  # no cards in hand
     cashPlayer -= einsatz    # pay einsatz
     cashDealer -= einsatz    # pay einsatz
     cashPot += 2 * einsatz     # add einsatz to round cash
     playerStop = False    # set default to continue
-    
+
     print("\n----- new round -----")
     handDealer.append(dealCard())
     handPlayer.append(dealCard())
     handPlayer.append(dealCard())
     displayCash()
     displayCards()
-    
-    # player plays 
-    while (evalHand(handPlayer) < 21) and (playerStop == False):
+
+    # player plays
+    while (evalHand(handPlayer) < 21) and (playerStop is False):
         # ask the player if he wants to take another card
         if input("pull another card? (y/n): ") == "y":
             handPlayer.append(dealCard())
             displayCards()
         else:
             playerStop = True
-    
+
     # dealer plays
     while (evalHand(handPlayer) < 22) and (evalHand(handDealer) < 17):
         handDealer.append(dealCard())
         displayCards()
-    
+
     # show end result
     displayResult(handPlayer, handDealer)
 
