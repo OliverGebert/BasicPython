@@ -7,3 +7,5 @@ ducks.append(Duck("brown", "water"))
 
 for d in ducks:
     print(d.draw())
+    print(d.quak())
+    print(d.fly())
