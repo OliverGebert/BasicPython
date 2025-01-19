@@ -13,6 +13,12 @@ class Fly(FlyBehavior):
         return "I fly"
 
 
+class FlyPropeller(FlyBehavior):
+
+    def fly(self):
+        return "I fly with an propeller"
+
+
 class NoFly(FlyBehavior):
 
     def fly(self):
@@ -59,6 +65,9 @@ class Duck(ABC):
 
     def performFly(self):
         return self.flyBehavior.fly()
+
+    def setFlyBehavior(self, fb):
+        self.flyBehavior = fb
 
 
 class RealDuck(Duck):
