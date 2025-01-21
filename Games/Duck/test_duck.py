@@ -1,6 +1,6 @@
 import pytest
 
-from duck import RealDuck, RubberDuck, WoodenDuck
+from duck import RealDuck, RubberDuck, WoodenDuck, FlyPropeller
 
 
 class TestRealDuck:
@@ -9,8 +9,9 @@ class TestRealDuck:
     def realduck(self):
         return RealDuck("blue", "water")
 
-    def test_draw(self, realduck):
-        assert "Duck has color blue" in realduck.draw()
+    def test_update(self, realduck):
+        assert realduck.color == "blue"
+        assert realduck.type == "water"
 
     def test_performFly(self, realduck):
         assert realduck.performFly() == "I fly"
@@ -25,8 +26,9 @@ class TestRubberDuck:
     def rubberduck(self):
         return RubberDuck("green", "rubber")
 
-    def test_draw(self, rubberduck):
-        assert "Duck has color green" in rubberduck.draw()
+    def test_update(self, rubberduck):
+        assert rubberduck.color == "green"
+        assert rubberduck.type == "rubber"
 
     def test_performFly(self, rubberduck):
         assert rubberduck.performFly() == "I cannot fly"
@@ -41,11 +43,14 @@ class TestWoodenDuck:
     def woodenduck(self):
         return WoodenDuck("brown", "wood")
 
-    def test_draw(self, woodenduck):
-        assert "Duck has color brown" in woodenduck.draw()
+    def test_update(self, woodenduck):
+        assert woodenduck.color == "brown"
+        assert woodenduck.type == "wood"
 
     def test_performFly(self, woodenduck):
         assert woodenduck.performFly() == "I cannot fly"
+        woodenduck.setFlyBehavior(FlyPropeller())
+        assert woodenduck.performFly() == "I fly with an propeller"
 
     def test_performQuak(self, woodenduck):
         assert woodenduck.performQuack() == "---"

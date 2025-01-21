@@ -1,20 +1,43 @@
-from duck import RealDuck, RubberDuck, WoodenDuck, FlyPropeller
+from abc import ABC, abstractmethod
+from duck import IObserver
 
-ducks = []
-ducks.append(RealDuck("green", "water"))
-ducks.append(RubberDuck("pink", "rubber"))
-ducks.append(WoodenDuck("brown", "wooden"))
 
-for d in ducks:
-    print("----------")
-    print(d.draw())
-    print(d.performQuack())
-    print(d.performFly())
+class ISubject(ABC):
+    @abstractmethod
+    def registerObserver(o: IObserver):
+        pass
 
-for d in ducks:
-    if "wooden" in d.draw():
-        d.setFlyBehavior(FlyPropeller())
-    print("----------")
-    print(d.draw())
-    print(d.performQuack())
-    print(d.performFly())
+    @abstractmethod
+    def removeObserver(o: IObserver):
+        pass
+
+    @abstractmethod
+    def notifyObservers():
+        pass
+
+
+class Pont(ISubject):
+
+    def __init__(self, cap, pred):
+        self.capacity = int(cap)
+        self.predator = bool(pred)
+        self.ducklist = []
+
+    def registerObserver(self, duck):
+        self.ducklist.append(duck)
+
+    def removeObserver(self, duck):
+        pass
+
+    def notifyObservers(self):
+        for d in self.ducklist:
+            d.update()
+
+    def count(self):
+        return len(self.ducklist)
+
+    def changePredator(self, pred):
+        self.predator = pred
+
+    def changeCapacity(self, cap):
+        self.capacity = cap

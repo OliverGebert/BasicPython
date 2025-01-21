@@ -1,64 +1,77 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 
-class FlyBehavior(ABC):
+class IFlyBehavior(ABC):
     @abstractmethod
     def fly(self):
         pass
 
 
-class Fly(FlyBehavior):
+class Fly(IFlyBehavior):
 
     def fly(self):
         return "I fly"
 
 
-class FlyPropeller(FlyBehavior):
+class FlyPropeller(IFlyBehavior):
 
     def fly(self):
         return "I fly with an propeller"
 
 
-class NoFly(FlyBehavior):
+class NoFly(IFlyBehavior):
 
     def fly(self):
         return "I cannot fly"
 
 
-class QuackBehavior(ABC):
+class IQuackBehavior(ABC):
     @abstractmethod
     def quack(self):
         pass
 
 
-class Quack(QuackBehavior):
+class Quack(IQuackBehavior):
 
     def quack(self):
         return "quaaak"
 
 
-class Quick(QuackBehavior):
+class Quick(IQuackBehavior):
 
     def quack(self):
         return "quiiik"
 
 
-class Quiet(QuackBehavior):
+class Quiet(IQuackBehavior):
 
     def quack(self):
         return "---"
 
 
-class Duck(ABC):
+class IObserver(ABC):
+    @abstractmethod
+    def update(self):
+        pass
+
+
+@dataclass
+class DuckAttributes:
+    colorList = ["green", "brown", "orange", "blue", "white", "black"]
+    typeList = ["male", "female"]
+
+
+class Duck(IObserver):
 
     def __init__(self, color, type):
         self.color = str(color)
         self.type = str(type)
-        self.quackBehavior: QuackBehavior()
-        self.flyBehavior: FlyBehavior()
+        self.quackBehavior: IQuackBehavior()
+        self.flyBehavior: IFlyBehavior()
 
-    def draw(self):
-        return "Duck has color " + self.color + "/nDuck from type " + self.type
+    def update(self):
+        print("Duck has color " + self.color + " - Duck from type " + self.type)
 
     def performQuack(self):
         return self.quackBehavior.quack()
