@@ -1,13 +1,15 @@
 import pytest
 
 from duck import RealDuck, RubberDuck, WoodenDuck, FlyPropeller
+from pont import Pont
 
 
 class TestRealDuck:
 
     @pytest.fixture
     def realduck(self):
-        return RealDuck("blue", "water")
+        pont = Pont(5, False)
+        return RealDuck("blue", "water", pont)
 
     def test_update(self, realduck):
         assert realduck.color == "blue"
@@ -15,6 +17,8 @@ class TestRealDuck:
 
     def test_performFly(self, realduck):
         assert realduck.performFly() == "I fly"
+        realduck.update()
+        assert realduck.performFly() == "I swim"
 
     def test_performQuak(self, realduck):
         assert realduck.performQuack() == "quaaak"
@@ -24,7 +28,8 @@ class TestRubberDuck:
 
     @pytest.fixture
     def rubberduck(self):
-        return RubberDuck("green", "rubber")
+        pont = Pont(5, False)
+        return RubberDuck("green", "rubber", pont)
 
     def test_update(self, rubberduck):
         assert rubberduck.color == "green"
@@ -41,7 +46,8 @@ class TestWoodenDuck:
 
     @pytest.fixture
     def woodenduck(self):
-        return WoodenDuck("brown", "wood")
+        pont = Pont(5, False)
+        return WoodenDuck("brown", "wood", pont)
 
     def test_update(self, woodenduck):
         assert woodenduck.color == "brown"

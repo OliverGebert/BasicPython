@@ -11,9 +11,8 @@ for lap in range(systemLaps):
     if (p.count() < pontCapacity):
         color = choice(DuckAttributes.colorList)
         type = choice(DuckAttributes.typeList)
-        d = RealDuck(color, type)
-        p.registerObserver(d)
+        d = RealDuck(color, type, p)
 
     print("Lap #" + str(lap))
-    p.changePredator(bool(randint(0, 1)))
+    p.setPredator(bool(randint(0, 1)))
     p.notifyObservers()
