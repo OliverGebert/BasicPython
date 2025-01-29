@@ -31,7 +31,7 @@ class Pont(ISubject):
 
     def notifyObservers(self):
         for d in self.ducklist:
-            d.update()
+            d.update(self.predator)
 
     def count(self):
         return len(self.ducklist)

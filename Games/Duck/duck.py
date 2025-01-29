@@ -52,7 +52,7 @@ class Quiet(IQuackBehavior):
 
 class IObserver(ABC):
     @abstractmethod
-    def update(self):
+    def update(self, b):
         pass
 
 
@@ -70,7 +70,8 @@ class Duck(IObserver):
         self.quackBehavior: IQuackBehavior()
         self.flyBehavior: IFlyBehavior()
 
-    def update(self):
+    def update(self, predator):
+        # todo: set flybehavior depending on predator
         print("Duck has color " + self.color + " - Duck from type " + self.type)
 
     def performQuack(self):
