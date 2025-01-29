@@ -8,6 +8,12 @@ class IFlyBehavior(ABC):
         pass
 
 
+class Swim(IFlyBehavior):
+
+    def fly(self):
+        return "I swim"
+
+
 class Fly(IFlyBehavior):
 
     def fly(self):
@@ -71,8 +77,12 @@ class Duck(IObserver):
         self.flyBehavior: IFlyBehavior()
 
     def update(self, predator):
+        if (predator):
+            self.flyBehavior = Fly()
+        else:
+            self.flyBehavior = Swim()
         # todo: set flybehavior depending on predator
-        print("Duck has color " + self.color + " - Duck from type " + self.type)
+        print("Duck has color " + self.color + " - " + self.flyBehavior.fly())
 
     def performQuack(self):
         return self.quackBehavior.quack()

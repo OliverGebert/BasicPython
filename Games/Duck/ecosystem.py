@@ -1,11 +1,10 @@
-from random import choice
+from random import choice, randint
 from duck import RealDuck, DuckAttributes
 from pont import Pont
 
 systemLaps = 10
 pontCapacity = 5
-pontPredator = False
-p = Pont(pontCapacity, pontPredator)
+p = Pont(pontCapacity, False)
 
 for lap in range(systemLaps):
 
@@ -15,5 +14,6 @@ for lap in range(systemLaps):
         d = RealDuck(color, type)
         p.registerObserver(d)
 
-    print("Lap #", lap)
+    print("Lap #" + str(lap))
+    p.changePredator(bool(randint(0, 1)))
     p.notifyObservers()

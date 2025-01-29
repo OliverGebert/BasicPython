@@ -30,6 +30,7 @@ class Pont(ISubject):
         pass
 
     def notifyObservers(self):
+        print("Predator status: " + str(self.predator))
         for d in self.ducklist:
             d.update(self.predator)
 
