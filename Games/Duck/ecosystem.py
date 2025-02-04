@@ -1,15 +1,16 @@
 from random import choice, randint
 from duck import RealDuck, DuckAttributes
 from pont import Pont
-from human import Human
+from human import Human, Foto, Gun
 
 systemLaps = 10
-pontCapacity = 5
+pontCapacity = 6
 p = Pont(pontCapacity, False)
 
 for lap in range(systemLaps):
 
-    if (p.count() < pontCapacity - 1):
+    if (p.count() < pontCapacity - 3):
+        # problem: even if no space in pont left, object is instanciated
         color = choice(DuckAttributes.colorList)
         type = choice(DuckAttributes.typeList)
         d = RealDuck(color, type, p)
@@ -19,4 +20,6 @@ for lap in range(systemLaps):
     p.notifyObservers()
 
 h = Human(p)
+h_f = Foto(p, h)
+h_f_g = Gun(p, h_f)
 p.notifyObservers()
