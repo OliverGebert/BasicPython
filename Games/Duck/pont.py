@@ -28,7 +28,8 @@ class Pont(ISubject):
             self.ducklist.append(duck)
 
     def removeObserver(self, duck):
-        # missing implementation of removing ducks from pont, also test_removeObserver not implemented
+        # missing implementation of removing ducks from pont,
+        # also test_removeObserver not implemented
         pass
 
     def notifyObservers(self):

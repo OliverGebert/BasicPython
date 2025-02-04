@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from observer import IObserver
 
 
 class IFlyBehavior(ABC):
@@ -54,12 +55,6 @@ class Quiet(IQuackBehavior):
 
     def quack(self):
         return "---"
-
-
-class IObserver(ABC):
-    @abstractmethod
-    def update(self, b):
-        pass
 
 
 @dataclass

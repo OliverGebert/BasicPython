@@ -18,6 +18,6 @@ class TestPont:
 
     def test_notifyObservers(self, pont):
         pont.setPredator(True)
-        assert pont.predator == True
+        assert pont.getPredator()
         pont.setPredator(False)
-        assert pont.predator == False
+        assert not pont.getPredator()
