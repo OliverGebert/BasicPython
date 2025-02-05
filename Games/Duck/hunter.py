@@ -1,11 +1,11 @@
 from interfaces import IObserver, IDecorator
 
 
-class Human(IDecorator, IObserver):
+class Hunter(IDecorator, IObserver):
     def __init__(self, pont):
         self.pont = pont
         self.pont.registerObserver(self)
-        self.description = "I'm human"
+        self.description = "I'm hunter"
 
     def update(self):
         print(self.getDescription())
@@ -16,8 +16,8 @@ class Human(IDecorator, IObserver):
 
 class Gadget(IDecorator, IObserver):
 
-    def __init__(self, pont, human: IDecorator):
-        self._human = human
+    def __init__(self, pont, hunter: IDecorator):
+        self._hunter = hunter
         self.pont = pont
         self.pont.registerObserver(self)
 
@@ -25,16 +25,16 @@ class Gadget(IDecorator, IObserver):
         print(self.getDescription())
 
     def getDescription(self):
-        return self._human.description
+        return self._hunter.description
 
 
 class Foto(Gadget):
 
     def getDescription(self):
-        return self._human.getDescription() + ", foto"
+        return self._hunter.getDescription() + ", foto"
 
 
 class Gun(Gadget):
 
     def getDescription(self):
-        return self._human.getDescription() + ", gun"
+        return self._hunter.getDescription() + ", gun"

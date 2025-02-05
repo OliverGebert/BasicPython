@@ -1,7 +1,7 @@
 from random import choice, randint
 from duck import RealDuck, DuckAttributes
 from pont import Pont
-from human import Human, Foto, Gun
+from hunter import Hunter, Foto, Gun
 
 systemLaps = 10
 pontCapacity = 6
@@ -19,7 +19,7 @@ for lap in range(systemLaps):
     p.setPredator(bool(randint(0, 1)))
     p.notifyObservers()
 
-h = Human(p)
+h = Hunter(p)
 h_f = Foto(p, h)
 h_f_g = Gun(p, h_f)
 p.notifyObservers()

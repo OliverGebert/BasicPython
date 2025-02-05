@@ -1,18 +1,18 @@
 import pytest
 
-from human import Human, Foto, Gun
+from hunter import Hunter, Foto, Gun
 from pont import Pont
 
 
-class TestHuman:
+class TestHunter:
 
     @pytest.fixture
-    def human(self):
+    def hunter(self):
         pont = Pont(5, False)
-        return Human(pont)
+        return Hunter(pont)
 
-    def test_update(self, human):
-        assert human.getDescription() == "I'm human"
+    def test_update(self, hunter):
+        assert hunter.getDescription() == "I'm hunter"
 
 
 class TestFoto:
@@ -20,10 +20,10 @@ class TestFoto:
     @pytest.fixture
     def foto(self):
         pont = Pont(5, False)
-        return Foto(pont, Human(pont))
+        return Foto(pont, Hunter(pont))
 
     def test_update(self, foto):
-        assert foto.getDescription() == "I'm human, foto"
+        assert foto.getDescription() == "I'm hunter, foto"
 
 
 class TestGun:
@@ -31,7 +31,7 @@ class TestGun:
     @pytest.fixture
     def gun(self):
         pont = Pont(5, False)
-        return Gun(pont, Human(pont))
+        return Gun(pont, Hunter(pont))
 
     def test_update(self, gun):
-        assert gun.getDescription() == "I'm human, gun"
+        assert gun.getDescription() == "I'm hunter, gun"
