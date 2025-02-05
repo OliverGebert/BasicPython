@@ -1,15 +1,7 @@
-from abc import ABC, abstractmethod
-from observer import IObserver
+from interfaces import IObserver, IDecorator
 
 
-class IHuman(ABC):
-
-    @abstractmethod
-    def getDescription(self):
-        pass
-
-
-class Human(IHuman, IObserver):
+class Human(IDecorator, IObserver):
     def __init__(self, pont):
         self.pont = pont
         self.pont.registerObserver(self)
@@ -22,9 +14,9 @@ class Human(IHuman, IObserver):
         return self.description
 
 
-class Gadget(IHuman, IObserver):
+class Gadget(IDecorator, IObserver):
 
-    def __init__(self, pont, human: IHuman):
+    def __init__(self, pont, human: IDecorator):
         self._human = human
         self.pont = pont
         self.pont.registerObserver(self)

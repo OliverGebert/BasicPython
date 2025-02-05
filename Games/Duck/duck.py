@@ -1,12 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from observer import IObserver
-
-
-class IFlyBehavior(ABC):
-    @abstractmethod
-    def fly(self):
-        pass
+from interfaces import IObserver, IFlyBehavior, IQuackBehavior
 
 
 class Swim(IFlyBehavior):
@@ -31,12 +25,6 @@ class NoFly(IFlyBehavior):
 
     def fly(self):
         return "I cannot fly"
-
-
-class IQuackBehavior(ABC):
-    @abstractmethod
-    def quack(self):
-        pass
 
 
 class Quack(IQuackBehavior):

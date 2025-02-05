@@ -1,19 +1,4 @@
-from abc import ABC, abstractmethod
-from duck import IObserver
-
-
-class ISubject(ABC):
-    @abstractmethod
-    def registerObserver(o: IObserver):
-        pass
-
-    @abstractmethod
-    def removeObserver(o: IObserver):
-        pass
-
-    @abstractmethod
-    def notifyObservers():
-        pass
+from interfaces import ISubject
 
 
 class Pont(ISubject):
