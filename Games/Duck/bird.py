@@ -1,6 +1,12 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from interfaces import IObserver, IFlyBehavior, IQuackBehavior
+
+
+@dataclass
+class BirdAttributes:
+    birdlist = ["duck", "gull", "swan"]
+    colorList = ["green", "brown", "orange", "blue", "white", "black"]
+    typeList = ["male", "female"]
 
 
 class Swim(IFlyBehavior):
@@ -45,29 +51,23 @@ class Quiet(IQuackBehavior):
         return "---"
 
 
-@dataclass
-class DuckAttributes:
-    colorList = ["green", "brown", "orange", "blue", "white", "black"]
-    typeList = ["male", "female"]
+class Bird(IObserver):
 
-
-class Duck(IObserver):
-
-    def __init__(self, color, type, pont):
+    def __init__(self, color, type, lake):
         self.color = str(color)
         self.type = str(type)
-        self.pont = pont    # have a reference for de-register
-        self.pont.registerObserver(self)
+        self.lake = lake    # have a reference for de-register
+        self.lake.registerObserver(self)
         self.quackBehavior: IQuackBehavior()
         self.flyBehavior: IFlyBehavior()
 
     def update(self):
-        if (self.pont.getPredator()):
+        if (self.lake.getPredator()):
             self.flyBehavior = Fly()
         else:
             self.flyBehavior = Swim()
 
-        print("Duck has color " + self.color + " - " + self.flyBehavior.fly())
+        print("Bird has color " + self.color + " - " + self.flyBehavior.fly())
 
     def performQuack(self):
         return self.quackBehavior.quack()
@@ -79,19 +79,19 @@ class Duck(IObserver):
         self.flyBehavior = fb
 
 
-class RealDuck(Duck):
+class RealBird(Bird):
 
     quackBehavior = Quack()
     flyBehavior = Fly()
 
 
-class RubberDuck(Duck):
+class RubberBird(Bird):
 
     quackBehavior = Quick()
     flyBehavior = NoFly()
 
 
-class WoodenDuck(Duck):
+class WoodenBird(Bird):
 
     quackBehavior = Quiet()
     flyBehavior = NoFly()

@@ -1,37 +1,37 @@
 import pytest
 
-from hunter import Hunter, Foto, Gun
-from pont import Pont
+from human import Human, Foto, Gun
+from lake import Lake
 
 
-class TestHunter:
+class TestHuman:
 
     @pytest.fixture
-    def hunter(self):
-        pont = Pont(5, False)
-        return Hunter(pont)
+    def human(self):
+        lake = Lake(5, False)
+        return Human(lake)
 
-    def test_update(self, hunter):
-        assert hunter.getDescription() == "I'm hunter"
+    def test_update(self, human):
+        assert human.getDescription() == "I'm human"
 
 
 class TestFoto:
 
     @pytest.fixture
     def foto(self):
-        pont = Pont(5, False)
-        return Foto(pont, Hunter(pont))
+        lake = Lake(5, False)
+        return Foto(lake, Human(lake))
 
     def test_update(self, foto):
-        assert foto.getDescription() == "I'm hunter, foto"
+        assert foto.getDescription() == "I'm human, foto"
 
 
 class TestGun:
 
     @pytest.fixture
     def gun(self):
-        pont = Pont(5, False)
-        return Gun(pont, Hunter(pont))
+        lake = Lake(5, False)
+        return Gun(lake, Human(lake))
 
     def test_update(self, gun):
-        assert gun.getDescription() == "I'm hunter, gun"
+        assert gun.getDescription() == "I'm human, gun"

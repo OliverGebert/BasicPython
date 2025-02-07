@@ -1,29 +1,29 @@
 from interfaces import ISubject
 
 
-class Pont(ISubject):
+class Lake(ISubject):
 
     def __init__(self, cap, pred):
         self.capacity = int(cap)
         self.predator = bool(pred)
-        self.ducklist = []
+        self.habitantlist = []
 
-    def registerObserver(self, duck):
-        if (len(self.ducklist) < self.capacity):
-            self.ducklist.append(duck)
+    def registerObserver(self, habitant):
+        if (len(self.habitantlist) < self.capacity):
+            self.habitantlist.append(habitant)
 
-    def removeObserver(self, duck):
-        # missing implementation of removing ducks from pont,
+    def removeObserver(self, habitant):
+        # missing implementation of removing habitants from lake,
         # also test_removeObserver not implemented
         pass
 
     def notifyObservers(self):
         print("Predator status: " + str(self.predator))
-        for d in self.ducklist:
-            d.update()
+        for h in self.habitantlist:
+            h.update()
 
     def count(self):
-        return len(self.ducklist)
+        return len(self.habitantlist)
 
     def getPredator(self):
         return self.predator
