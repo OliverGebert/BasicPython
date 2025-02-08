@@ -4,9 +4,7 @@ from interfaces import IObserver, IFlyBehavior, IQuackBehavior
 
 @dataclass
 class BirdAttributes:
-    birdlist = ["duck", "gull", "swan"]
-    colorList = ["green", "brown", "orange", "blue", "white", "black"]
-    typeList = ["male", "female"]
+    birdList = ["duck", "gull", "swan"]
 
 
 class Swim(IFlyBehavior):
@@ -36,26 +34,25 @@ class NoFly(IFlyBehavior):
 class Quack(IQuackBehavior):
 
     def quack(self):
-        return "quaaak"
+        return "quack"
 
 
-class Quick(IQuackBehavior):
-
-    def quack(self):
-        return "quiiik"
-
-
-class Quiet(IQuackBehavior):
+class Squawk(IQuackBehavior):
 
     def quack(self):
-        return "---"
+        return "squawk"
+
+
+class Honk(IQuackBehavior):
+
+    def quack(self):
+        return "honk"
 
 
 class Bird(IObserver):
 
-    def __init__(self, color, type, lake):
-        self.color = str(color)
-        self.type = str(type)
+    def __init__(self, lake):
+        self.bird = "bird"
         self.lake = lake    # have a reference for de-register
         self.lake.registerObserver(self)
         self.quackBehavior: IQuackBehavior()
@@ -67,7 +64,7 @@ class Bird(IObserver):
         else:
             self.flyBehavior = Swim()
 
-        print("Bird has color " + self.color + " - " + self.flyBehavior.fly())
+        print("Bird is " + self.bird + " - " + self.flyBehavior.fly() + " - " + self.quackBehavior.quack())
 
     def performQuack(self):
         return self.quackBehavior.quack()
@@ -79,19 +76,31 @@ class Bird(IObserver):
         self.flyBehavior = fb
 
 
-class RealBird(Bird):
+class Duck(Bird):
+
+    def __init__(self, lake):
+        super().__init__(lake)
+        self.bird = "Duck"
 
     quackBehavior = Quack()
     flyBehavior = Fly()
 
 
-class RubberBird(Bird):
+class Gull(Bird):
 
-    quackBehavior = Quick()
+    def __init__(self, lake):
+        super().__init__(lake)
+        self.bird = "Gull"
+
+    quackBehavior = Squawk()
     flyBehavior = NoFly()
 
 
-class WoodenBird(Bird):
+class Swan(Bird):
 
-    quackBehavior = Quiet()
+    def __init__(self, lake):
+        super().__init__(lake)
+        self.bird = "Swan"
+
+    quackBehavior = Honk()
     flyBehavior = NoFly()

@@ -1,62 +1,46 @@
 import pytest
 
-from bird import RealBird, RubberBird, WoodenBird, FlyPropeller
+from bird import Duck, Gull, Swan, FlyPropeller
 from lake import Lake
 
 
-class TestRealBird:
+class TestGull:
 
     @pytest.fixture
     def realbird(self):
         lake = Lake(5, False)
-        return RealBird("blue", "water", lake)
+        return Gull(lake)
 
     def test_update(self, realbird):
-        assert realbird.color == "blue"
-        assert realbird.type == "water"
-
-    def test_performFly(self, realbird):
-        assert realbird.performFly() == "I fly"
-        realbird.update()
-        assert realbird.performFly() == "I swim"
+        assert realbird.bird == "Gull"
 
     def test_performQuak(self, realbird):
-        assert realbird.performQuack() == "quaaak"
+        assert realbird.performQuack() == "squawk"
 
 
-class TestRubberBird:
+class TestDuck:
 
     @pytest.fixture
     def rubberbird(self):
         lake = Lake(5, False)
-        return RubberBird("green", "rubber", lake)
+        return Duck(lake)
 
     def test_update(self, rubberbird):
-        assert rubberbird.color == "green"
-        assert rubberbird.type == "rubber"
-
-    def test_performFly(self, rubberbird):
-        assert rubberbird.performFly() == "I cannot fly"
+        assert rubberbird.bird == "Duck"
 
     def test_performQuak(self, rubberbird):
-        assert rubberbird.performQuack() == "quiiik"
+        assert rubberbird.performQuack() == "quack"
 
 
-class TestWoodenBird:
+class TestSwan:
 
     @pytest.fixture
     def woodenbird(self):
         lake = Lake(5, False)
-        return WoodenBird("brown", "wood", lake)
+        return Swan(lake)
 
     def test_update(self, woodenbird):
-        assert woodenbird.color == "brown"
-        assert woodenbird.type == "wood"
-
-    def test_performFly(self, woodenbird):
-        assert woodenbird.performFly() == "I cannot fly"
-        woodenbird.setFlyBehavior(FlyPropeller())
-        assert woodenbird.performFly() == "I fly with an propeller"
+        assert woodenbird.bird == "Swan"
 
     def test_performQuak(self, woodenbird):
-        assert woodenbird.performQuack() == "---"
+        assert woodenbird.performQuack() == "honk"

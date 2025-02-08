@@ -1,5 +1,5 @@
 from random import choice, randint
-from bird import RealBird, BirdAttributes
+from bird import BirdAttributes, Duck, Gull, Swan
 from lake import Lake
 from human import Human, Foto, Gun
 
@@ -11,9 +11,13 @@ for lap in range(systemLaps):
 
     if (p.count() < lakeCapacity - 3):
         # problem: even if no space in lake left, object is instanciated
-        color = choice(BirdAttributes.colorList)
-        type = choice(BirdAttributes.typeList)
-        d = RealBird(color, type, p)
+        match choice(BirdAttributes.birdList):
+            case "duck":
+                bird = Duck(p)
+            case "gull":
+                bird = Gull(p)
+            case "swan":
+                bird = Swan(p)
 
     print("Lap #" + str(lap))
     p.setPredator(bool(randint(0, 1)))
