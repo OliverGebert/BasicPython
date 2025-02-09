@@ -7,6 +7,14 @@ class IObserver(ABC):
     def update(self, b):
         pass
 
+    @abstractmethod
+    def getDescription(self):
+        pass
+
+    @abstractmethod
+    def getDanger(self):
+        pass
+
 
 class ISubject(ABC):
     @abstractmethod

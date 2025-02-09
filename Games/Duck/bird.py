@@ -31,24 +31,27 @@ class Bird(IObserver):
         self.description = "bird"
         self.lake = lake    # have a reference for de-register
         self.moveBehavior: IBirdBehavior()
+        self.danger = 1
+
+    def registerObserver(self):
+        self.lake.registerObserver(self, self.getDanger())
 
     def getDescription(self):
         return self.description
 
-    def update(self):
-        print("Bird is " + self.description + " - " + self.moveBehavior.move() + " - " + self.performQuack())
-
-    def registerObserver(self):
-        self.lake.registerObserver(self)
+    def getDanger(self):
+        return self.danger
 
     def performQuack(self):
         return "---"
 
-    def performFly(self):
+    def performMove(self):
         return self.moveBehavior.move()
 
-    def setFlyBehavior(self, fb):
-        self.moveBehavior = fb
+    def update(self, lakedanger):
+        if lakedanger > 10:
+            self.moveBehavior = Fly()
+        print("Bird is " + self.getDescription() + " - " + self.performMove() + " - " + self.performQuack())
 
 
 class Duck(Bird):

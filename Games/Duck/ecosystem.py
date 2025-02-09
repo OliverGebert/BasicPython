@@ -20,7 +20,6 @@ for i in range(lakeCapacity - 2):
     ecoList.append(bird)
 
 w = Predator(p)
-ecoList.append(w)
 h = Human(p)
 h_f = Foto(p, h)
 h_f_g = Gun(p, h_f)
@@ -29,4 +28,10 @@ ecoList.append(h_f)
 # populate lake with ecoList habitants and notify all observers
 for habitant in ecoList:
     habitant.registerObserver()
+
+p.notifyObservers()
+
+# w.registerObserver()
+h_f_g.registerObserver()
+
 p.notifyObservers()
