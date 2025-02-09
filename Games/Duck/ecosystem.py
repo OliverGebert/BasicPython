@@ -9,7 +9,7 @@ p = Lake(lakeCapacity, False)
 ecoList = []
 
 # define habitants of the ecosystem
-for i in range(lakeCapacity - 3):
+for i in range(lakeCapacity - 2):
     match choice(BirdAttributes.birdList):
         case "duck":
             bird = Duck(p)
@@ -24,11 +24,9 @@ ecoList.append(w)
 h = Human(p)
 h_f = Foto(p, h)
 h_f_g = Gun(p, h_f)
-ecoList.append(h_f_g)
+ecoList.append(h_f)
 
 # populate lake with ecoList habitants and notify all observers
-
 for habitant in ecoList:
     habitant.registerObserver()
-
 p.notifyObservers()
