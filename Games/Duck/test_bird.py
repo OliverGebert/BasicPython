@@ -1,46 +1,55 @@
 import pytest
 
-from bird import Duck, Gull, Swan, FlyPropeller
+from bird import Duck, Gull, Swan
 from lake import Lake
 
 
 class TestGull:
 
     @pytest.fixture
-    def realbird(self):
+    def gull(self):
         lake = Lake(5, False)
         return Gull(lake)
 
-    def test_update(self, realbird):
-        assert realbird.bird == "Gull"
+    def test_update(self, gull):
+        assert gull.getDescription() == "Gull"
 
-    def test_performQuak(self, realbird):
-        assert realbird.performQuack() == "squawk"
+    def test_move(self, gull):
+        assert gull.moveBehavior.move() == "I walk"
+
+    def test_performQuak(self, gull):
+        assert gull.performQuack() == "squawk"
 
 
 class TestDuck:
 
     @pytest.fixture
-    def rubberbird(self):
+    def duck(self):
         lake = Lake(5, False)
         return Duck(lake)
 
-    def test_update(self, rubberbird):
-        assert rubberbird.bird == "Duck"
+    def test_update(self, duck):
+        assert duck.getDescription() == "Duck"
 
-    def test_performQuak(self, rubberbird):
-        assert rubberbird.performQuack() == "quack"
+    def test_move(self, duck):
+        assert duck.moveBehavior.move() == "I fly"
+
+    def test_performQuak(self, duck):
+        assert duck.performQuack() == "quack"
 
 
 class TestSwan:
 
     @pytest.fixture
-    def woodenbird(self):
+    def swan(self):
         lake = Lake(5, False)
         return Swan(lake)
 
-    def test_update(self, woodenbird):
-        assert woodenbird.bird == "Swan"
+    def test_update(self, swan):
+        assert swan.getDescription() == "Swan"
 
-    def test_performQuak(self, woodenbird):
-        assert woodenbird.performQuack() == "honk"
+    def test_move(self, swan):
+        assert swan.moveBehavior.move() == "I swim"
+
+    def test_performQuak(self, swan):
+        assert swan.performQuack() == "honk"

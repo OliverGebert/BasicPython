@@ -5,7 +5,6 @@ class Lake(ISubject):
 
     def __init__(self, cap, pred):
         self.capacity = int(cap)
-        self.predator = bool(pred)
         self.habitantlist = []
 
     def registerObserver(self, habitant):
@@ -18,18 +17,21 @@ class Lake(ISubject):
         pass
 
     def notifyObservers(self):
-        print("Predator status: " + str(self.predator))
+        print("Predator status: " + str(self.hasPredator()))
+
         for h in self.habitantlist:
             h.update()
 
     def count(self):
         return len(self.habitantlist)
 
-    def getPredator(self):
-        return self.predator
+    def hasPredator(self):
+        predator = False
+        for habitant in self.habitantlist:
+            if "gun" in habitant.getDescription():
+                predator = True
 
-    def setPredator(self, pred):
-        self.predator = pred
+        return predator
 
     def setCapacity(self, cap):
         self.capacity = cap

@@ -15,9 +15,3 @@ class TestLake:
             assert lake.count() == d+1
         lake.registerObserver("bird")
         assert lake.count() == lake.capacity
-
-    def test_notifyObservers(self, lake):
-        lake.setPredator(True)
-        assert lake.getPredator()
-        lake.setPredator(False)
-        assert not lake.getPredator()

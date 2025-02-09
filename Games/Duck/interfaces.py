@@ -29,13 +29,7 @@ class IDecorator(ABC):
         pass
 
 
-class IFlyBehavior(ABC):
+class IBirdBehavior(ABC):
     @abstractmethod
-    def fly(self):
-        pass
-
-
-class IQuackBehavior(ABC):
-    @abstractmethod
-    def quack(self):
+    def move(self):
         pass

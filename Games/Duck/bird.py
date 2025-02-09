@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from interfaces import IObserver, IFlyBehavior, IQuackBehavior
+from interfaces import IObserver, IBirdBehavior
 
 
 @dataclass
@@ -7,100 +7,81 @@ class BirdAttributes:
     birdList = ["duck", "gull", "swan"]
 
 
-class Swim(IFlyBehavior):
+class Swim(IBirdBehavior):
 
-    def fly(self):
+    def move(self):
         return "I swim"
 
 
-class Fly(IFlyBehavior):
+class Fly(IBirdBehavior):
 
-    def fly(self):
+    def move(self):
         return "I fly"
 
 
-class FlyPropeller(IFlyBehavior):
+class Walk(IBirdBehavior):
 
-    def fly(self):
-        return "I fly with an propeller"
-
-
-class NoFly(IFlyBehavior):
-
-    def fly(self):
-        return "I cannot fly"
-
-
-class Quack(IQuackBehavior):
-
-    def quack(self):
-        return "quack"
-
-
-class Squawk(IQuackBehavior):
-
-    def quack(self):
-        return "squawk"
-
-
-class Honk(IQuackBehavior):
-
-    def quack(self):
-        return "honk"
+    def move(self):
+        return "I walk"
 
 
 class Bird(IObserver):
 
     def __init__(self, lake):
-        self.bird = "bird"
+        self.description = "bird"
         self.lake = lake    # have a reference for de-register
-        self.lake.registerObserver(self)
-        self.quackBehavior: IQuackBehavior()
-        self.flyBehavior: IFlyBehavior()
+        self.moveBehavior: IBirdBehavior()
+
+    def getDescription(self):
+        return self.description
 
     def update(self):
-        if (self.lake.getPredator()):
-            self.flyBehavior = Fly()
-        else:
-            self.flyBehavior = Swim()
+        print("Bird is " + self.description + " - " + self.moveBehavior.move() + " - " + self.performQuack())
 
-        print("Bird is " + self.bird + " - " + self.flyBehavior.fly() + " - " + self.quackBehavior.quack())
+    def registerObserver(self):
+        self.lake.registerObserver(self)
 
     def performQuack(self):
-        return self.quackBehavior.quack()
+        return "---"
 
     def performFly(self):
-        return self.flyBehavior.fly()
+        return self.moveBehavior.move()
 
     def setFlyBehavior(self, fb):
-        self.flyBehavior = fb
+        self.moveBehavior = fb
 
 
 class Duck(Bird):
 
     def __init__(self, lake):
         super().__init__(lake)
-        self.bird = "Duck"
+        self.description = "Duck"
 
-    quackBehavior = Quack()
-    flyBehavior = Fly()
+    def performQuack(self):
+        return "quack"
+
+    moveBehavior = Fly()
 
 
 class Gull(Bird):
 
     def __init__(self, lake):
         super().__init__(lake)
-        self.bird = "Gull"
+        self.description = "Gull"
 
-    quackBehavior = Squawk()
-    flyBehavior = NoFly()
+    def performQuack(self):
+        return "squawk"
+
+    moveBehavior = Walk()
 
 
 class Swan(Bird):
 
     def __init__(self, lake):
         super().__init__(lake)
-        self.bird = "Swan"
+        self.description = "Swan"
 
-    quackBehavior = Honk()
-    flyBehavior = NoFly()
+    def performQuack(self):
+        return "honk"
+
+    moveBehavior = Swim()
