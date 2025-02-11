@@ -19,6 +19,7 @@ class Lake(ISubject):
         pass
 
     def notifyObservers(self):
+        print("*****")
         print("Danger status: " + str(self.danger))
         print("predator at lake: " + str(self.hasPredator()))
 
@@ -34,7 +35,7 @@ class Lake(ISubject):
     def hasPredator(self):
         predator = False
         for habitant in self.habitantlist:
-            if ("gun" in habitant.getDescription()) or ("predator" in habitant.getDescription()):
+            if ("gun" in habitant.getDescription()) or ("wolf" in habitant.getDescription()):
                 predator = True
 
         return predator
