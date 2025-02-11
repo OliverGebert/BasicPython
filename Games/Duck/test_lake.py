@@ -11,7 +11,8 @@ class TestLake:
 
     def test_registerObserver(self, lake):
         for d in range(lake.capacity):
-            lake.registerObserver("bird")
-            assert lake.count() == d+1
-        lake.registerObserver("bird")
-        assert lake.count() == lake.capacity
+            lake.registerObserver("bird", 2)
+            assert lake.getCount() == d+1
+            assert lake.getDanger() == 2*(d+1)
+        lake.registerObserver("bird", 2)
+        assert lake.getCount() == lake.capacity

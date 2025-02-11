@@ -1,4 +1,10 @@
+from dataclasses import dataclass
 from interfaces import IObserver, IDecorator
+
+
+@dataclass
+class GadgetAttributes:
+    gadgetList = ["foto", "gun", "bag"]
 
 
 class Human(IDecorator, IObserver):
@@ -55,3 +61,12 @@ class Gun(Gadget):
 
     def getDanger(self):
         return self._human.getDanger() + 5
+
+
+class Bag(Gadget):
+
+    def getDescription(self):
+        return self._human.getDescription() + ", bag"
+
+    def getDanger(self):
+        return self._human.getDanger() + 1

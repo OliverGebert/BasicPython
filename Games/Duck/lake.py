@@ -25,8 +25,11 @@ class Lake(ISubject):
         for h in self.habitantlist:
             h.update(self.danger)
 
-    def count(self):
+    def getCount(self):
         return len(self.habitantlist)
+
+    def getDanger(self):
+        return self.danger
 
     def hasPredator(self):
         predator = False
