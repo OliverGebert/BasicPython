@@ -1,0 +1,14 @@
+session_name: 3-pane-split
+windows:
+  - window_name: python_dev
+    window_index: 1
+    layout: main-horizontal
+    options:
+      main-pane-height: 65%
+    shell_command_before:
+      - cd ~/home/Python/BasicPython/Games/Duck/  # Erste Befehle in allen Panes
+    panes:
+      - shell_command: nvim ./ecosystem.py  # Pane 1
+      - shell_command: pytest -v  # Pane 2 mit Fokus
+        focus: true
+      - shell_command: lazygit  # Pane 3
