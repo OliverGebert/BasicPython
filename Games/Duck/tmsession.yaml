@@ -8,7 +8,7 @@ windows:
     shell_command_before:
       - cd ~/home/Python/BasicPython/Games/Duck/  # Erste Befehle in allen Panes
     panes:
-      - shell_command: nvim ./ecosystem.py  # Pane 1
-      - shell_command: pytest -v  # Pane 2 mit Fokus
+      - shell_command: nvim ./*.py  # Pane 1
         focus: true
+      - shell_command: pytest -v  # Pane 2 mit Fokus
       - shell_command: lazygit  # Pane 3
