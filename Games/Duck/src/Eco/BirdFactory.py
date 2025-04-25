@@ -1,4 +1,4 @@
-from bird import Duck, Gull, Swan
+from Eco.bird import Duck, Gull, Swan
 
 
 def createBird(lake, type):

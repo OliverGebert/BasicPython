@@ -1,4 +1,4 @@
-from predator import Wolf, Fox
+from Eco.predator import Wolf, Fox
 
 
 def createPredator(lake, type):

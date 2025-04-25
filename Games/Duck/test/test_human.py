@@ -1,7 +1,7 @@
 import pytest
 
-from human import Human, Foto, Gun
-from lake import Lake
+from Eco.human import Human, Foto, Gun
+from Eco.lake import Lake
 
 
 class TestHuman:

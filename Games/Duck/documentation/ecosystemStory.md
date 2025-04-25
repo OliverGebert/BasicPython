@@ -1,7 +1,7 @@
 # The Ecosystem
 it provides a system of elements like landscape, plants and animals, which require certain frame conditions to prosper and also provide constraints or attrractors to animals in the same ecosystem.
 
-![Ecosystem](ecosystem.png)
+![Ecosystem](./Ecosystem.png)
 
 ## Landscape
 A Landscape has a size (lxw), e.g. 5x5 and each tile is of one type
@@ -57,3 +57,7 @@ It has the following features:
 - different creatures are attracted by different eco system states: humans are attracted by wheather condition and number of birds and predators. birds are attracted by other birds and absence of predators or humans. predators are attracted by birds and absence of humans.
 - eco system knows all creatures at lake side, wheather conditions, number of birds, humans and predators and total danger index.
 
+# Implementation Detail
+
+![PackageDiagram](./packages_Ecosystem.png)
+![ClassDiagram](./classes_Ecosystem.png)

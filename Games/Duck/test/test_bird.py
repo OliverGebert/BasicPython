@@ -1,7 +1,7 @@
 import pytest
 
-from bird import Duck, Gull, Swan
-from lake import Lake
+from Eco.bird import Duck, Gull, Swan
+from Eco.lake import Lake
 
 
 class TestGull:

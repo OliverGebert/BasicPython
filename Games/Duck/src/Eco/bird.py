@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from interfaces import IObserver, IBirdBehavior
+from Eco.interfaces import IObserver, IBirdBehavior
 
 
 @dataclass

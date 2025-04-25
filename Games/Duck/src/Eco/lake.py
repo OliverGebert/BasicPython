@@ -1,25 +1,25 @@
-from interfaces import ISubject
+from Eco.interfaces import ISubject, IObserver
 
 
 class Lake(ISubject):
 
     def __init__(self, cap, pred):
         self.capacity = int(cap)
-        self.habitantlist = []
+        self.habitantlist: list[IObserver] = []
         self.danger = 0
 
-    def registerObserver(self, habitant, danger):
+    def registerObserver(self, habitant: IObserver, danger):
         if (len(self.habitantlist) < self.capacity):
             self.habitantlist.append(habitant)
             self.danger += danger
 
-    def removeObserver(self, habitant):
+    def removeObserver(self, habitant: IObserver):
         # missing implementation of removing habitants from lake,
         # also test_removeObserver not implemented
         pass
 
     def notifyObservers(self):
-        print("*****")
+        print("****")
         print("Danger status: " + str(self.danger))
         print("predator at lake: " + str(self.hasPredator()))
 

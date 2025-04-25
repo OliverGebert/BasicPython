@@ -1,6 +1,6 @@
 import pytest
 
-from lake import Lake
+from Eco.lake import Lake
 
 
 class TestLake:

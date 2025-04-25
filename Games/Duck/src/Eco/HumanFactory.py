@@ -1,4 +1,4 @@
-from human import Human, Foto, Gun, Bag
+from Eco.human import Human, Foto, Gun, Bag
 
 
 def createHuman(lake, type):

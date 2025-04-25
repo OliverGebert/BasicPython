@@ -1,15 +1,16 @@
-from random import choice, randint
-from BirdFactory import createBird
-from HumanFactory import createHuman
-from PredatorFactory import createPredator
-from lake import Lake
-from bird import BirdAttributes
-from human import GadgetAttributes
-from predator import PredatorAttributes
+from random import choice  #, randint
+from Eco.interfaces import IObserver
+from Eco.BirdFactory import createBird
+from Eco.HumanFactory import createHuman
+from Eco.PredatorFactory import createPredator
+from Eco.lake import Lake
+from Eco.bird import BirdAttributes
+from Eco.human import GadgetAttributes
+from Eco.predator import PredatorAttributes
 
 lakeCapacity = 8
 p = Lake(lakeCapacity, False)
-ecoList = []
+ecoList: list[IObserver] = []
 
 # define habitants of the ecosystem
 for i in range(lakeCapacity - 2):
@@ -27,6 +28,7 @@ human.registerObserver()
 p.notifyObservers()
 
 # create predator and notify al lobservers again
-predator = createPredator(p, choice(PredatorAttributes.gadgetList))
+pa = PredatorAttributes.gadgetList
+predator = createPredator(p, choice(pa))
 predator.registerObserver()
 p.notifyObservers()

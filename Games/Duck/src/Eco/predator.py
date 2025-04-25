@@ -1,5 +1,5 @@
-from interfaces import IObserver
 from dataclasses import dataclass
+from Eco.interfaces import IObserver
 
 
 @dataclass
