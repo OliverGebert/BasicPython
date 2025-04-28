@@ -1,0 +1,20 @@
+session_name: 3-pane-split
+windows:
+  - window_name: python_dev_large
+    window_index: 1
+    layout: main-horizontal
+    options:
+      main-pane-height: 65%
+    shell_command_before:
+      - cd ~/home/Python/BasicPython/Games/Duck/  # cd to root dir of ecosystem simulation
+      - export PYTHONPATH=$(pwd)/src   # set PYTHONPATH in order to allow pytest to find ECo package 
+    panes:
+      - shell_command:
+          - cd src/Eco
+          #  load .py to buffers, open markdown doc, vsplit and open ecosystem.py, open neotree
+          - nvim  -c "args *.py" -c "edit ../../documentation/ecosystemStory.md" -c "vsp ecosystem.py" -c "vertical resize +15" -c "Neotree show" 
+        focus: true
+      - shell_command:
+          - pytest -v
+      - shell_command:
+          - lazygit
