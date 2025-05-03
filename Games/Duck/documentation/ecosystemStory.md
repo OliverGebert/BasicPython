@@ -1,5 +1,5 @@
 # The Ecosystem
-it provides a system of elements like landscape, plants and animals, which require certain frame conditions to prosper and also provide constraints or attrractors to animals in the same ecosystem.
+it provides a system of elements like landscape, plants and animals, which require certain frame conditions to prosper and also provide constraints or attractors to animals in the same ecosystem.
 
 ![Ecosystem](./Ecosystem.png)
 
@@ -9,9 +9,9 @@ A Landscape has a size (lxw), e.g. 5x5 and each tile is of one type
 - beach
 - wood
 
-Every tile can be entered by muiltiple habitants. In case more than one habitant enters the tile, following options exist:
-- a carnivor kills the other habitant
-- the strongest habitant pushes the othe habitants to one of the connected tiles.
+Every tile can be entered by multiple habitants. In case more than one habitant enters the tile, following options exist:
+- a carnivore kills the other habitant
+- the strongest habitant pushes the other habitants to one of the connected tiles.
 - later: birds might fly away from earth predator
 
 ## Tiles
@@ -35,7 +35,7 @@ Every tile can be entered by muiltiple habitants. In case more than one habitant
 - every habitant has a pace attribute (1-10) In case of multiple habitants, the higher habitant in the food chain chases the lower one. If the lower one is faster, it escapes to another tile. If not it will be killed.
 
 ## Progression
-The Ecosystem has a live in descrete rounds/progressions. In each round the folllowing happens:
+The Ecosystem has a live in discrete rounds/progressions. In each round the following happens:
 1 for each habitant the current food level is recalculated based on landscape offerings
 2 For each tile potential habitants analyse their most attractive next tile
 3 Each habitant moves to its most attractive tile
@@ -54,10 +54,12 @@ It has the following features:
 - birds can be duck types, gull or swans, they can fly, swim or duck
 - predators can be wolf and lynx, they can walk or hide
 - humans can be hunter or ranger, they can walk, sit or hide. They can have a gun, binocular or backsack, or all of which.
-- different creatures are attracted by different eco system states: humans are attracted by wheather condition and number of birds and predators. birds are attracted by other birds and absence of predators or humans. predators are attracted by birds and absence of humans.
-- eco system knows all creatures at lake side, wheather conditions, number of birds, humans and predators and total danger index.
+- different creatures are attracted by different eco system states: humans are attracted by weather condition and number of birds and predators. Birds are attracted by other birds and absence of predators or humans. Predators are attracted by birds and absence of humans.
+- eco system knows all creatures at lake side, weather conditions, number of birds, humans and predators and total danger index.
 
 # Implementation Detail
 
 ![PackageDiagram](./packages_Ecosystem.png)
+\begin{landscape}
 ![ClassDiagram](./classes_Ecosystem.png)
+\end{landscape}

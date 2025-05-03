@@ -1,12 +1,12 @@
 from Eco.bird import Duck, Gull, Swan
 
 
-def createBird(lake, type):
+def createBird(type):
     match type:
         case "duck":
-            bird = Duck(lake)
+            bird = Duck()
         case "gull":
-            bird = Gull(lake)
+            bird = Gull()
         case "swan":
-            bird = Swan(lake)
+            bird = Swan()
     return bird

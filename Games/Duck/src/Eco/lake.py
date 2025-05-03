@@ -1,11 +1,13 @@
 from Eco.interfaces import ISubject, IObserver
+from typing import List
 
 
 class Lake(ISubject):
 
     def __init__(self, cap, pred):
         self.capacity = int(cap)
-        self.habitantlist: list[IObserver] = []
+        self.firsthabitant: IObserver
+        self.habitantlist: List[IObserver] = []     # type: IObserver
         self.danger = 0
 
     def registerObserver(self, habitant: IObserver, danger):

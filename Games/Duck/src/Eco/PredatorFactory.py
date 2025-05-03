@@ -1,10 +1,10 @@
 from Eco.predator import Wolf, Fox
 
 
-def createPredator(lake, type):
+def createPredator(type):
     match type:
         case "wolf":
-            predator = Wolf(lake)
+            predator = Wolf()
         case "fox":
-            predator = Fox(lake)
+            predator = Fox()
     return predator

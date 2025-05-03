@@ -26,7 +26,7 @@ class ISubject(ABC):
         pass
 
     @abstractmethod
-    def notifyObservers():
+    def notifyObservers(self):
         pass
 
 

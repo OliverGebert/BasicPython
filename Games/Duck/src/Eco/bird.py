@@ -26,18 +26,14 @@ class Walk(IBirdBehavior):
 
 
 class Bird(IObserver):
-
-    def __init__(self, lake):
+    def __init__(self):
         self.description = "bird"
-        self.lake = lake    # have a reference for de-register
         self.moveBehavior: IBirdBehavior()
         self.danger = 1
 
-    def registerObserver(self):
-        self.lake.registerObserver(self, self.getDanger())
-
     def getDescription(self):
-        return self.description
+        result = self.description + " and " + self.moveBehavior.move()
+        return result
 
     def getDanger(self):
         return self.danger
@@ -49,15 +45,13 @@ class Bird(IObserver):
         return self.moveBehavior.move()
 
     def update(self, lakedanger):
-        if lakedanger > 10:
-            self.moveBehavior = Fly()
-        print("Bird is " + self.getDescription() + " - " + self.performMove() + " - " + self.performQuack())
+        pass
 
 
 class Duck(Bird):
 
-    def __init__(self, lake):
-        super().__init__(lake)
+    def __init__(self):
+        super().__init__()
         self.description = "Duck"
 
     def performQuack(self):
@@ -68,8 +62,8 @@ class Duck(Bird):
 
 class Gull(Bird):
 
-    def __init__(self, lake):
-        super().__init__(lake)
+    def __init__(self):
+        super().__init__()
         self.description = "Gull"
 
     def performQuack(self):
@@ -80,8 +74,8 @@ class Gull(Bird):
 
 class Swan(Bird):
 
-    def __init__(self, lake):
-        super().__init__(lake)
+    def __init__(self):
+        super().__init__()
         self.description = "Swan"
 
     def performQuack(self):

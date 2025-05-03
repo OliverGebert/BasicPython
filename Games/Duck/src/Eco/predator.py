@@ -1,20 +1,14 @@
 from dataclasses import dataclass
 from Eco.interfaces import IObserver
-
-
 @dataclass
 class PredatorAttributes:
     gadgetList = ["wolf", "fox"]
 
 
 class Predator(IObserver):
-    def __init__(self, lake):
-        self.lake = lake
+    def __init__(self):
         self.description = "I'm a predator"
         self.danger = 0
-
-    def registerObserver(self):
-        self.lake.registerObserver(self, self.getDanger())
 
     def getDescription(self):
         return self.description
@@ -27,14 +21,14 @@ class Predator(IObserver):
 
 
 class Wolf(Predator):
-    def __init__(self, lake):
-        super().__init__(lake)
+    def __init__(self):
+        super().__init__()
         self.description = "I'm a wolf"
         self.danger = 10
 
 
 class Fox(Predator):
-    def __init__(self, lake):
-        super().__init__(lake)
+    def __init__(self):
+        super().__init__()
         self.description = "I'm a fox"
         self.danger = 6

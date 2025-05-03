@@ -8,27 +8,31 @@ from Eco.bird import BirdAttributes
 from Eco.human import GadgetAttributes
 from Eco.predator import PredatorAttributes
 
-lakeCapacity = 8
-p = Lake(lakeCapacity, False)
-ecoList: list[IObserver] = []
 
-# define habitants of the ecosystem
-for i in range(lakeCapacity - 2):
-    bird = createBird(p, choice(BirdAttributes.birdList))
-    ecoList.append(bird)
+class Ecosystem():
+    def __init__(self, size: int):
+        self.lakeCapacity = size
+        # self.lakeCapacity = 8
+        self.p = Lake(self.lakeCapacity, False)
+        self.ecoList: list[IObserver] = []
 
-# populate lake with ecoList habitants and notify all observers
-for habitant in ecoList:
-    habitant.registerObserver()
-p.notifyObservers()
+    def populateEcosystem(self):
+        # define habitants of the ecosystem
+        for i in range(self.lakeCapacity - 2):
+            bird = createBird(choice(BirdAttributes.birdList))
+            self.ecoList.append(bird)
+        self.ecoList.append(createHuman(choice(GadgetAttributes.gadgetList)))
+        pa = PredatorAttributes.gadgetList
+        self.ecoList.append(createPredator(choice(pa)))
+        # populate lake with ecoList habitants and notify all observers
+        for habitant in self.ecoList:
+            self.p.registerObserver(habitant, 1)
+            print(habitant.getDescription())
+        self.p.notifyObservers()
+        pass
 
-# create hunman and notify al lobservers again
-human = createHuman(p, choice(GadgetAttributes.gadgetList))
-human.registerObserver()
-p.notifyObservers()
+    def lapEcosystem():
+        pass
 
-# create predator and notify al lobservers again
-pa = PredatorAttributes.gadgetList
-predator = createPredator(p, choice(pa))
-predator.registerObserver()
-p.notifyObservers()
+e = Ecosystem(12)
+e.populateEcosystem()

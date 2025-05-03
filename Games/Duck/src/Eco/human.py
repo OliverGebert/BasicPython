@@ -7,14 +7,10 @@ class GadgetAttributes:
     gadgetList = ["foto", "gun", "bag"]
 
 
-class Human(IDecorator, IObserver):
-    def __init__(self, lake):
-        self.lake = lake
+class Human(IObserver):
+    def __init__(self):
         self.description = "I'm human"
         self.danger = 3
-
-    def registerObserver(self):
-        self.lake.registerObserver(self, self.getDanger())
 
     def getDescription(self):
         return self.description
@@ -28,15 +24,11 @@ class Human(IDecorator, IObserver):
 
 class Gadget(IDecorator, IObserver):
 
-    def __init__(self, lake, human: IDecorator):
+    def __init__(self, human: Human):
         self._human = human
-        self.lake = lake
 
     def update(self, lakedanger):
         print(self.getDescription())
-
-    def registerObserver(self):
-        self.lake.registerObserver(self, self.getDanger())
 
     def getDescription(self):
         return self._human.getDescription()

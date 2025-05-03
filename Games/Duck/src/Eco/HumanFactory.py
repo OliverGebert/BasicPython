@@ -1,13 +1,13 @@
 from Eco.human import Human, Foto, Gun, Bag
 
 
-def createHuman(lake, type):
-    raw = Human(lake)
+def createHuman(type):
+    raw = Human()
     match type:
         case "foto":
-            human = Foto(lake, raw)
+            human = Foto(raw)
         case "gun":
-            human = Gun(lake, raw)
+            human = Gun(raw)
         case "bag":
-            human = Bag(lake, raw)
+            human = Bag(raw)
     return human
