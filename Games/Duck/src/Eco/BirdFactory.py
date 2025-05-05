@@ -1,4 +1,9 @@
+from dataclasses import dataclass
 from Eco.bird import Duck, Gull, Swan
+
+@dataclass
+class BirdAttributes:
+    birdList = ["duck", "gull", "swan"]
 
 
 def createBird(type):

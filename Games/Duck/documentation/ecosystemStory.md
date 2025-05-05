@@ -60,6 +60,4 @@ It has the following features:
 # Implementation Detail
 
 ![PackageDiagram](./packages_Ecosystem.png)
-\begin{landscape}
 ![ClassDiagram](./classes_Ecosystem.png)
-\end{landscape}

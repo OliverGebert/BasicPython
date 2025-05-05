@@ -1,68 +1,39 @@
 from random import choice  #, randint
-from Eco.interfaces import IObserver
-from Eco.BirdFactory import createBird
-from Eco.HumanFactory import createHuman
-from Eco.PredatorFactory import createPredator
-from Eco.lake import Lake
-from Eco.bird import BirdAttributes
-from Eco.human import GadgetAttributes
-from Eco.predator import PredatorAttributes
+from Eco.BirdFactory import createBird, BirdAttributes
+from Eco.HumanFactory import createHuman, GadgetAttributes
+from Eco.PredatorFactory import createPredator, PredatorAttributes
+from Eco.habitant import Habitant
 
-
-class Habitant(IObserver):
-    habitantDict = {
-        "empty": {
-            "name": "Empty",
-            "id": "*",
-            "dominance": 0
-        },
-        "Bird": {
-            "name": "Bird",
-            "id": "B",
-            "dominance": 2
-        },
-        "Human": {
-            "name": "Human",
-            "id": "H",
-            "dominance": 8
-        }
-    }
-    habitantTypes = list(habitantDict.keys())   # Mammel, Predator
-
-    def __init__(self, type):
-        self.habitant = Habitant.habitantDict[type]
-
-    def update(self):
-        pass
-
-    def getDescription(self):
-        pass
-
-    def getDanger(self):
-        pass
-
-    def id(self):
-        return self.habitant["id"] 
 
 class Patch():
 
     patchDict = {
-        "Forrest": {
+        "o": {
+            "name" : "none",
+            "char" : "o",
+            "color" : "37m",
+            "ground" : 0,
+            "view" : 0
+        },
+        "f": {
             "name": "Forrest",
-            "id": "F",
-            "color": "32m",
+            "char": "F",
+            "color": "32m", # green
+            "ground" : 1,
             "view": 2
         },
-        "Water": {
+        "w": {
             "name": "Water",
-            "id": "W",
-            "color": "34m",
+            "char": "W",
+            "color": "34m", # blue
+            "ground" : 1,
             "view": 8
         },
-        "Beach": {
+        "b": {
             "name": "Beach",
-            "id": "B",
-            "color": "33m",
+            "char": "B",
+            "color": "33m", # yellow
+            "ground" : 1,
             "view": 7
         }
     }
@@ -70,64 +41,84 @@ class Patch():
 
     def __init__(self, type):
         self.patch = Patch.patchDict[type]
-        self.habitant: Habitant = Habitant("empty")
+        self.habitant: Habitant = Habitant("e")
 
-    def id(self):
-        return self.patch["id"]
+    def returnName(self):
+        return self.patch["name"]
 
-    def color(self):
+    def returnChar(self):
+        return self.patch["char"]
+
+    def returnColor(self):
         return self.patch["color"]
 
-    def habitantid(self):
-        return self.habitant.id()
+    def isHabitable(self):
+        return False if self.patch["view"] == 0 else True
+
+    def returnView(self):
+        return self.patch["view"]
+
+    def returnHabitantID(self):
+        return self.habitant.returnHabitantID()
+
+    def returnHabitantDescription(self):
+        return self.habitant.returnDescription()
+
  
 class Ecosystem():
-    def __init__(self, y: int, x: int):
-        #old constructor
-        self.lakeCapacity = x
-        self.p = Lake(self.lakeCapacity, False)
-        self.ecoList: list[IObserver] = []
-
-        #new constructor
+    def __init__(self, y: int, x: int, ecolist):
         self.y = y # zeile
         self.x = x # spalte
-        self.grid = [[Patch(choice(Patch.patchTypes)) for _ in range(x)]for _ in range(y)] # y spalte (aussen), x zeile (innen)
+        self.grid = []
+        for _ in range(y):  # äußere Schleife: Zeile (vertikal)
+            row = []
+            for _ in range(x):  # innere Schleife: Spalte (horizontal)
+                patch_type = choice(ecolist or "o")
+                ecolist.remove(patch_type) if patch_type in ecolist else None
+                row.append(Patch(patch_type))
+            self.grid.append(row)
 
-    def populateEcosystem(self):
-        # old population
-        # define habitants of the ecosystem
-        for i in range(self.lakeCapacity - 2):
-            bird = createBird(choice(BirdAttributes.birdList))
-            self.ecoList.append(bird)
-        self.ecoList.append(createHuman(choice(GadgetAttributes.gadgetList)))
-        pa = PredatorAttributes.gadgetList
-        self.ecoList.append(createPredator(choice(pa)))
-        # populate lake with ecoList habitants and notify all observers
-        for habitant in self.ecoList:
-            self.p.registerObserver(habitant, 1)
-            print(habitant.getDescription())
-        self.p.notifyObservers()
-
-        # new population
+    def populateEcosystem(self, hList):
+        # poulate patches in grid with habitants according to hList
         for y in range(len(self.grid)):
             zeile = []
             for x in range(len(self.grid[y])):
-                self.grid[y][x].habitant = Habitant(choice(Habitant.habitantTypes))
+                if self.grid[y][x].isHabitable():
+                    habitantType = choice(hList or "e")
+                    hList.remove(habitantType) if habitantType in hList else None
+                    match habitantType:
+                        case "b":
+                            hab = createBird(choice(BirdAttributes.birdList))
+                        case "h":
+                            hab = createHuman(choice(GadgetAttributes.gadgetList))
+                        case "p":
+                            hab = createPredator(choice(PredatorAttributes.predatorList))
+                        case "e":
+                            hab = Habitant("e")
+                    self.grid[y][x].habitant = hab
 
     def plotEcosystem(self):
+        report = []
         for y in range(len(self.grid)):
+            info = []
             zeile = []
             for x in range(len(self.grid[y])):
-                patchcolor = self.grid[y][x].color()
-                symbol = self.grid[y][x].habitantid() or "="
+                patchcolor = self.grid[y][x].returnColor()
+                symbol = self.grid[y][x].returnHabitantID() or "="
                 zeile.append("\033[" + patchcolor + symbol + "\033[0m")
+                info.append(self.grid[y][x].returnName() + " " + self.grid[y][x].habitant.returnDescription() + ",")
             print(" ".join(zeile))
+            report.append(" ".join(info))
+            report.append("\n")
+        print("".join(report))
 
     def lapEcosystem():
         pass
 
+patchList = list("wwbbbbwfffff")  #define the nature of the patches on the ecosystem
+habitantList = list("bbhbbbppp")    # define the habitants on the ecosystem
 
-e = Ecosystem(3, 5)
+e = Ecosystem(3, 5, patchList)
 e.plotEcosystem()
-e.populateEcosystem()
+e.populateEcosystem(habitantList)
 e.plotEcosystem()

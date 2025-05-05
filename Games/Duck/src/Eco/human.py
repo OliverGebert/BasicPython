@@ -1,14 +1,11 @@
-from dataclasses import dataclass
-from Eco.interfaces import IObserver, IDecorator
+from Eco.interfaces import IDecorator
+from Eco.habitant import Habitant
 
 
-@dataclass
-class GadgetAttributes:
-    gadgetList = ["foto", "gun", "bag"]
-
-
-class Human(IObserver):
-    def __init__(self):
+class Human(Habitant):
+    def __init__(self, human):
+        super().__init__("h")
+        self.habitantData["description"] = "HUMAN"
         self.description = "I'm human"
         self.danger = 3
 
@@ -22,9 +19,10 @@ class Human(IObserver):
         print(self.getDescription())
 
 
-class Gadget(IDecorator, IObserver):
+class Gadget(IDecorator, Human):
 
     def __init__(self, human: Human):
+        super().__init__("h")
         self._human = human
 
     def update(self, lakedanger):
@@ -39,6 +37,9 @@ class Gadget(IDecorator, IObserver):
 
 class Foto(Gadget):
 
+    def __init__(self, human):
+        super().__init__("h")
+
     def getDescription(self):
         return self._human.getDescription() + ", foto"
 
@@ -48,17 +49,11 @@ class Foto(Gadget):
 
 class Gun(Gadget):
 
+    def __init__(self, human):
+        super().__init__("h")
+
     def getDescription(self):
         return self._human.getDescription() + ", gun"
 
     def getDanger(self):
         return self._human.getDanger() + 5
-
-
-class Bag(Gadget):
-
-    def getDescription(self):
-        return self._human.getDescription() + ", bag"
-
-    def getDanger(self):
-        return self._human.getDanger() + 1

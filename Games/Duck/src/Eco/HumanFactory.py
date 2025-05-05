@@ -1,13 +1,17 @@
-from Eco.human import Human, Foto, Gun, Bag
+from dataclasses import dataclass
+from Eco.human import Human, Foto, Gun
+
+
+@dataclass
+class GadgetAttributes:
+    gadgetList = ["foto", "gun"]
 
 
 def createHuman(type):
-    raw = Human()
+    raw = Human("h")
     match type:
         case "foto":
             human = Foto(raw)
         case "gun":
             human = Gun(raw)
-        case "bag":
-            human = Bag(raw)
     return human

@@ -1,10 +1,5 @@
-from dataclasses import dataclass
-from Eco.interfaces import IObserver, IBirdBehavior
-
-
-@dataclass
-class BirdAttributes:
-    birdList = ["duck", "gull", "swan"]
+from Eco.interfaces import IBirdBehavior
+from Eco.habitant import Habitant
 
 
 class Swim(IBirdBehavior):
@@ -25,8 +20,10 @@ class Walk(IBirdBehavior):
         return "I walk"
 
 
-class Bird(IObserver):
+class Bird(Habitant):
     def __init__(self):
+        super().__init__("b")
+        self.habitantData["description"] = "bird"
         self.description = "bird"
         self.moveBehavior: IBirdBehavior()
         self.danger = 1
@@ -52,6 +49,7 @@ class Duck(Bird):
 
     def __init__(self):
         super().__init__()
+        self.habitantData["description"] = "duck"
         self.description = "Duck"
 
     def performQuack(self):
@@ -64,6 +62,7 @@ class Gull(Bird):
 
     def __init__(self):
         super().__init__()
+        self.habitantData["description"] = "gull"
         self.description = "Gull"
 
     def performQuack(self):
@@ -76,6 +75,7 @@ class Swan(Bird):
 
     def __init__(self):
         super().__init__()
+        self.habitantData["description"] = "swan"
         self.description = "Swan"
 
     def performQuack(self):
