@@ -8,7 +8,7 @@ class GadgetAttributes:
 
 
 def createHuman(type):
-    raw = Human("h")
+    raw = Human()
     match type:
         case "foto":
             human = Foto(raw)

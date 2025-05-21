@@ -3,8 +3,9 @@ from Eco.habitant import Habitant
 
 
 class Human(Habitant):
-    def __init__(self, human):
+    def __init__(self):
         super().__init__("h")
+
         self.habitantData["description"] = "HUMAN"
         self.description = "I'm human"
         self.danger = 3
@@ -22,7 +23,7 @@ class Human(Habitant):
 class Gadget(IDecorator, Human):
 
     def __init__(self, human: Human):
-        super().__init__("h")
+        super().__init__()
         self._human = human
 
     def update(self, lakedanger):
@@ -38,7 +39,7 @@ class Gadget(IDecorator, Human):
 class Foto(Gadget):
 
     def __init__(self, human):
-        super().__init__("h")
+        super().__init__(Human())
 
     def getDescription(self):
         return self._human.getDescription() + ", foto"
@@ -50,7 +51,7 @@ class Foto(Gadget):
 class Gun(Gadget):
 
     def __init__(self, human):
-        super().__init__("h")
+        super().__init__(Human())
 
     def getDescription(self):
         return self._human.getDescription() + ", gun"

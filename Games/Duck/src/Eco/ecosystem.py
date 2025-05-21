@@ -116,7 +116,7 @@ class Ecosystem():
         pass
 
 patchList = list("wwbbbbwfffff")  #define the nature of the patches on the ecosystem
-habitantList = list("bbhbbbppp")    # define the habitants on the ecosystem
+habitantList = list("bbhbbpppp")    # define the habitants on the ecosystem
 
 e = Ecosystem(3, 5, patchList)
 e.plotEcosystem()

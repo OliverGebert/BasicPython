@@ -36,7 +36,7 @@ class Bird(Habitant):
         return self.danger
 
     def performQuack(self):
-        return "---"
+        return "-----"
 
     def performMove(self):
         return self.moveBehavior.move()

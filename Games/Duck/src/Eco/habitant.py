@@ -6,7 +6,7 @@ class Habitant(IObserver):
     habitantDict = {
         "e": {
             "name": "Empty",
-            "description": "",
+            "description": "none",
             "char": "*",
             "dominance": 0
         },
